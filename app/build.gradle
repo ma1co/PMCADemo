@@ -17,3 +17,15 @@ android {
         targetCompatibility JavaVersion.VERSION_1_6
     }
 }
+
+configurations {
+    provided
+}
+
+android.applicationVariants.each { variant ->
+    variant.javaCompile.classpath += configurations.provided
+}
+
+dependencies {
+    provided project(':framework')
+}
