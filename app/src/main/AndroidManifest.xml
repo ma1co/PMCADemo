@@ -12,6 +12,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".KeyEventActivity"
+            android:label="@string/title_activity_key_event" >
+        </activity>
     </application>
 
 </manifest>
