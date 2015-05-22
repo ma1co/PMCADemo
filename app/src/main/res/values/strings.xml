@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">PMCADemo</string>
     <string name="title_activity_main">PMCADemo</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_key_event">Key events</string>
+    <string name="title_activity_property">Properties</string>
+
+    <string name="modelName">Name</string>
+    <string name="modelCode">Product code</string>
+    <string name="modelSerial">Serial number</string>
+    <string name="firmwareVersion">Firmware</string>
 </resources>

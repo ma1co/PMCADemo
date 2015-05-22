@@ -16,6 +16,10 @@
             android:name=".KeyEventActivity"
             android:label="@string/title_activity_key_event" >
         </activity>
+        <activity
+            android:name=".PropertyActivity"
+            android:label="@string/title_activity_property" >
+        </activity>
     </application>
 
 </manifest>
