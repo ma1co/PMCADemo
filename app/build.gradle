@@ -8,8 +8,8 @@ android {
         applicationId "com.github.ma1co.pmcademo.app"
         minSdkVersion 10
         targetSdkVersion 10
-        versionCode 1
-        versionName "1.0"
+        versionCode "git -C ${projectDir} rev-list --first-parent --count HEAD".execute().text.trim().toInteger()
+        versionName "git -C ${projectDir} describe --always --tags --dirty".execute().text.trim().replaceAll("^v", "")
     }
 
     compileOptions {
@@ -24,6 +24,13 @@ configurations {
 
 android.applicationVariants.each { variant ->
     variant.javaCompile.classpath += configurations.provided
+}
+
+android.applicationVariants.all { variant ->
+    variant.outputs.each { output ->
+        def apkName = "PMCADemo-${output.baseName}-${variant.versionName}-${variant.versionCode}.apk"
+        output.outputFile = new File(output.outputFile.parent, apkName)
+    }
 }
 
 dependencies {
