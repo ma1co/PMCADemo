@@ -2,17 +2,37 @@ package com.github.ma1co.pmcademo.app;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import com.sony.scalar.hardware.avio.DisplayManager;
 
-public class KeyEventActivity extends BaseActivity {
+public class KeyEventActivity extends BaseActivity implements DisplayManager.DisplayEventListener {
+    private TextView textView;
+    private DisplayManager displayManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_key_event);
+
+        textView = (TextView) findViewById(R.id.log);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayManager = new DisplayManager();
+        displayManager.setDisplayStatusListener(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        displayManager.releaseDisplayStatusListener();
+        displayManager.finish();
+        displayManager = null;
     }
 
     protected void log(String msg) {
-        TextView log = (TextView) findViewById(R.id.log);
-        log.append(msg + "\n");
+        textView.append(msg + "\n");
     }
 
     protected boolean logKey(Boolean down, String key) {
@@ -50,4 +70,19 @@ public class KeyEventActivity extends BaseActivity {
     protected boolean onLensAttached() { log("lens attached"); return false; }
     protected boolean onDail1Changed(int value) { return logDial("dial 1", value); }
     protected boolean onDail2Changed(int value) { return logDial("dial 2", value); }
+
+    @Override
+    public void onDeviceStatusChanged(int event) {
+        if (event == DisplayManager.EVENT_SWITCH_DEVICE) {
+            String device = displayManager.getActiveDevice();
+            if (device.equals(DisplayManager.DEVICE_ID_FINDER))
+                log("Display changed: Finder");
+            else if (device.equals(DisplayManager.DEVICE_ID_HDMI))
+                log("Display changed: HDMI");
+            else if (device.equals(DisplayManager.DEVICE_ID_PANEL))
+                log("Display changed: Panel");
+            else if (device.equals(DisplayManager.DEVICE_ID_NONE))
+                log("Display changed: None");
+        }
+    }
 }
