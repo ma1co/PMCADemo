@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends BaseActivity implements AdapterView.OnItemClickListener {
-    protected class ActivityListItem {
-        protected int nameResource;
-        protected Class<? extends Activity> clazz;
+    protected class ActivityListItem extends ListAdapter.ListItem {
+        private int nameResource;
+        private Class<? extends Activity> clazz;
 
         public ActivityListItem(int nameResource, Class<? extends Activity> clazz) {
             this.nameResource = nameResource;
@@ -19,13 +18,17 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         }
 
         @Override
-        public String toString() {
+        public String getText1() {
             return getResources().getString(nameResource);
+        }
+
+        public Class<? extends Activity> getActivityClass() {
+            return clazz;
         }
     }
 
-    ActivityListItem activities[] = {
-        new ActivityListItem(R.string.title_activity_key_event, KeyEventActivity.class)
+    protected ActivityListItem activities[] = {
+        new ActivityListItem(R.string.title_activity_key_event, KeyEventActivity.class),
     };
 
     @Override
@@ -41,13 +44,13 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         });
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(new ArrayAdapter<ActivityListItem>(this, android.R.layout.simple_list_item_1, activities));
+        listView.setAdapter(new ListAdapter<ActivityListItem>(this, activities));
         listView.setOnItemClickListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         ActivityListItem item = (ActivityListItem) adapterView.getItemAtPosition(position);
-        startActivity(new Intent(this, item.clazz));
+        startActivity(new Intent(this, item.getActivityClass()));
     }
 }
