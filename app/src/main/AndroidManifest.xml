@@ -2,8 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.github.ma1co.pmcademo.app" >
 
-    <application
-        android:label="@string/app_name" >
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application android:label="@string/app_name" >
+        <receiver android:name=".ExitCompletedReceiver" >
+            <intent-filter>
+                <action android:name="com.android.server.DAConnectionManagerService.ExitCompleted" />
+                <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
@@ -19,6 +29,10 @@
         <activity
             android:name=".PropertyActivity"
             android:label="@string/title_activity_property" >
+        </activity>
+        <activity
+            android:name=".WifiActivity"
+            android:label="@string/title_activity_wifi" >
         </activity>
         <activity
             android:name=".TimeActivity"
