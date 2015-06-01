@@ -9,7 +9,10 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.format.Formatter;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 public class WifiActivity extends BaseActivity {
     private TextView textView;
@@ -18,6 +21,7 @@ public class WifiActivity extends BaseActivity {
     private BroadcastReceiver wifiStateReceiver;
     private BroadcastReceiver supplicantStateReceiver;
     private BroadcastReceiver networkStateReceiver;
+    private HttpServer httpServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,8 @@ public class WifiActivity extends BaseActivity {
                 networkStateChanged(((NetworkInfo) intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO)).getDetailedState());
             }
         };
+
+        httpServer = new HttpServer();
     }
 
     @Override
@@ -58,6 +64,9 @@ public class WifiActivity extends BaseActivity {
         registerReceiver(supplicantStateReceiver, new IntentFilter(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION));
         registerReceiver(networkStateReceiver, new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION));
         wifiManager.setWifiEnabled(true);
+        try {
+            httpServer.start();
+        } catch (IOException e) {}
     }
 
     @Override
@@ -67,6 +76,7 @@ public class WifiActivity extends BaseActivity {
         unregisterReceiver(supplicantStateReceiver);
         unregisterReceiver(networkStateReceiver);
         wifiManager.setWifiEnabled(false);
+        httpServer.stop();
     }
 
     @Override
@@ -103,7 +113,7 @@ public class WifiActivity extends BaseActivity {
                 log(ssid + ": Obtaining IP");
                 break;
             case CONNECTED:
-                log(ssid + ": Connected");
+                wifiConnected();
                 break;
             case DISCONNECTED:
                 log("Disconnected");
@@ -112,6 +122,14 @@ public class WifiActivity extends BaseActivity {
                 log("Connection failed");
                 break;
         }
+    }
+
+    protected void wifiConnected() {
+        WifiInfo info = wifiManager.getConnectionInfo();
+        String ssid = info.getSSID();
+        String ip = Formatter.formatIpAddress(info.getIpAddress());
+        log(ssid + ": Connected. Server URL: http://" + ip + ":" + HttpServer.PORT + "/");
+        webView.loadUrl("https://www.google.com/");
     }
 
     protected void log(String msg) {

@@ -27,4 +27,5 @@ android.applicationVariants.all { variant ->
 
 dependencies {
     provided project(':framework')
+    compile 'com.nanohttpd:nanohttpd:2.1.1'
 }
