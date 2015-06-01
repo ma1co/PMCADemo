@@ -3,6 +3,7 @@
     <string name="title_activity_main">PMCADemo</string>
     <string name="title_activity_key_event">Key events</string>
     <string name="title_activity_property">Properties</string>
+    <string name="title_activity_time">Time</string>
 
     <string name="modelName">Name</string>
     <string name="modelCode">Product code</string>

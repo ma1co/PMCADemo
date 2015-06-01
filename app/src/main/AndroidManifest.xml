@@ -20,6 +20,10 @@
             android:name=".PropertyActivity"
             android:label="@string/title_activity_property" >
         </activity>
+        <activity
+            android:name=".TimeActivity"
+            android:label="@string/title_activity_time" >
+        </activity>
     </application>
 
 </manifest>
