@@ -18,17 +18,9 @@ android {
     }
 }
 
-configurations {
-    provided
-}
-
-android.applicationVariants.each { variant ->
-    variant.javaCompile.classpath += configurations.provided
-}
-
 android.applicationVariants.all { variant ->
     variant.outputs.each { output ->
-        def apkName = "PMCADemo-${output.baseName}-${variant.versionName}-${variant.versionCode}.apk"
+        def apkName = "PMCADemo-${output.baseName}-${variant.versionName}.apk"
         output.outputFile = new File(output.outputFile.parent, apkName)
     }
 }
