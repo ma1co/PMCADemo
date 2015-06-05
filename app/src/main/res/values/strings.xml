@@ -6,6 +6,7 @@
     <string name="title_activity_time">Time</string>
     <string name="title_activity_wifi">Internet</string>
     <string name="title_activity_wifi_setting">Wifi Settings</string>
+    <string name="title_activity_wifi_direct">Wifi direct</string>
 
     <string name="modelName">Name</string>
     <string name="modelCode">Product code</string>
