@@ -1,6 +1,7 @@
 package com.github.ma1co.pmcademo.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.KeyEvent;
 import com.sony.scalar.sysutil.ScalarInput;
 
@@ -113,5 +114,13 @@ public class BaseActivity extends Activity {
     protected boolean onC2KeyUp() {
         onBackPressed();
         return true;
+    }
+
+    protected void setAutoPowerOffMode(boolean enable) {
+        String mode = enable ? "APO/NORMAL" : "APO/NO";
+        Intent intent = new Intent();
+        intent.setAction("com.android.server.DAConnectionManagerService.apo");
+        intent.putExtra("apo_info", mode);
+        sendBroadcast(intent);
     }
 }

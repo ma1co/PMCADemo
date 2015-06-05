@@ -67,6 +67,7 @@ public class WifiActivity extends BaseActivity {
         try {
             httpServer.start();
         } catch (IOException e) {}
+        setAutoPowerOffMode(false);
     }
 
     @Override
@@ -77,6 +78,7 @@ public class WifiActivity extends BaseActivity {
         unregisterReceiver(networkStateReceiver);
         wifiManager.setWifiEnabled(false);
         httpServer.stop();
+        setAutoPowerOffMode(true);
     }
 
     @Override
