@@ -28,6 +28,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     }
 
     protected ActivityListItem activities[] = {
+        new ActivityListItem(R.string.title_activity_camera, CameraActivity.class),
         new ActivityListItem(R.string.title_activity_key_event, KeyEventActivity.class),
         new ActivityListItem(R.string.title_activity_property, PropertyActivity.class),
         new ActivityListItem(R.string.title_activity_time, TimeActivity.class),
