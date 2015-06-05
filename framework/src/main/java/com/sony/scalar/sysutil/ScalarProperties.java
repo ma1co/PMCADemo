@@ -1,7 +1,7 @@
 package com.sony.scalar.sysutil;
 
 public class ScalarProperties {
-    public class PictureSize {
+    public static class PictureSize {
         public int height;
         public int width;
     }

@@ -1,7 +1,7 @@
 package com.sony.wifi.direct;
 
 public class ServiceDiscoveryInfo implements android.os.Parcelable {
-    public class Status {
+    public static class Status {
         public static final int BAD_REQUEST = 3;
         public static final int REQUESTED_INFORMATION_NOT_AVAILABLE = 2;
         public static final int SERVICE_PROTOCOL_NOT_AVAILABLE = 1;

@@ -7,7 +7,7 @@ public class DisplayManager {
         public int res_w;
     }
 
-    public class DeviceStatus {
+    public static class DeviceStatus {
         public boolean active;
         public int format;
         public String id;
@@ -15,19 +15,19 @@ public class DisplayManager {
         public int viewPattern;
     }
 
-    public abstract interface DisplayEventListener {
-        public abstract void onDeviceStatusChanged(int event);
+    public interface DisplayEventListener {
+        void onDeviceStatusChanged(int event);
     }
 
-    public abstract interface OnScreenDisplayListener {
-        public abstract void onPreventBurnInOLED(int burn);
+    public interface OnScreenDisplayListener {
+        void onPreventBurnInOLED(int burn);
     }
 
-    public abstract interface VideoLayoutStatusListener {
-        public abstract void onLayoutChanged(VideoRect rect);
+    public interface VideoLayoutStatusListener {
+        void onLayoutChanged(VideoRect rect);
     }
 
-    public class VideoRect {
+    public static class VideoRect {
         public int pxBottom;
         public int pxLeft;
         public int pxRight;

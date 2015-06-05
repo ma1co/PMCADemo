@@ -1,7 +1,7 @@
 package com.sony.wifi.direct;
 
 public class DirectConfiguration implements android.os.Parcelable {
-    public class ConfigurationMethod {
+    public static class ConfigurationMethod {
         public static final int DISPLAY = 3;
         public static final int ETHERNET = 1;
         public static final int EXTERNAL_NFC_TOKEN = 4;
@@ -17,7 +17,7 @@ public class DirectConfiguration implements android.os.Parcelable {
         public static final int VIRTUAL_PUSH_BUTTON = 9;
     }
 
-    public class DeviceCapability {
+    public static class DeviceCapability {
         public static final int CONCURRENT_OPERATION = 2;
         public static final int P2P_CLIENT_DISCOVERABILITY = 1;
         public static final int P2P_DEVICE_LIMIT = 4;
@@ -26,7 +26,7 @@ public class DirectConfiguration implements android.os.Parcelable {
         public static final int SERVICE_DISCOVERY = 0;
     }
 
-    public class GroupCapability {
+    public static class GroupCapability {
         public static final int CROSS_CONNECTION = 4;
         public static final int GROUP_FORMATION = 6;
         public static final int INTRA_BSS_DISTRIBUTION = 3;
@@ -36,7 +36,7 @@ public class DirectConfiguration implements android.os.Parcelable {
         public static final int PERSISTENT_RECONNECT = 5;
     }
 
-    public class OperatingMode {
+    public static class OperatingMode {
         public static final int GO = 3;
         public static final int P2P_CLIENT = 2;
         public static final int P2P_DEVICE = 0;
