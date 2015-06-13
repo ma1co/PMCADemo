@@ -1,6 +1,7 @@
 package com.github.ma1co.pmcademo.app;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.TextView;
 import com.sony.scalar.hardware.avio.DisplayManager;
 
@@ -37,12 +38,26 @@ public class KeyEventActivity extends BaseActivity implements DisplayManager.Dis
 
     protected boolean logKey(Boolean down, String key) {
         log(key + " key " + (down ? "pressed" : "released"));
-        return false;
+        return true;
     }
 
     protected boolean logDial(String key, int value) {
         log(key + " dial changed: " + value);
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (!super.onKeyDown(keyCode, event))
+            log("Unknown key pressed: " + keyCode + " / " + event.getScanCode());
+        return true;
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (!super.onKeyUp(keyCode, event))
+            log("Unknown key released: " + keyCode + " / " + event.getScanCode());
+        return true;
     }
 
     protected boolean onUpKeyDown() { return logKey(true, "up"); }
@@ -65,11 +80,17 @@ public class KeyEventActivity extends BaseActivity implements DisplayManager.Dis
     protected boolean onFocusKeyUp() { return logKey(false, "focus"); }
     protected boolean onShutterKeyDown() { return logKey(true, "shutter"); }
     protected boolean onShutterKeyUp() { return logKey(false, "shutter"); }
+    protected boolean onPlayKeyDown() { return logKey(true, "play"); }
+    protected boolean onPlayKeyUp() { return logKey(false, "play"); }
+    protected boolean onMovieKeyDown() { return logKey(true, "movie"); }
+    protected boolean onMovieKeyUp() { return logKey(false, "movie"); }
     protected boolean onC1KeyDown() { return logKey(true, "c1"); }
     protected boolean onC1KeyUp() { return logKey(false, "c1"); }
-    protected boolean onLensAttached() { log("lens attached"); return false; }
-    protected boolean onDail1Changed(int value) { return logDial("dial 1", value); }
-    protected boolean onDail2Changed(int value) { return logDial("dial 2", value); }
+    protected boolean onLensAttached() { log("lens attached"); return true; }
+    protected boolean onLensDetached() { log("lens detached"); return true; }
+    protected boolean onUpperDialChanged(int value) { return logDial("upper dial", value); }
+    protected boolean onLowerDialChanged(int value) { return logDial("lower dial", value); }
+    protected boolean onModeDialChanged(int value) { return logDial("mode dial", value); }
 
     @Override
     public void onDeviceStatusChanged(int event) {

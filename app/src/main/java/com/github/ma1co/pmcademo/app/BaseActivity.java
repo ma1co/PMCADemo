@@ -7,6 +7,12 @@ import com.sony.scalar.sysutil.ScalarInput;
 
 public class BaseActivity extends Activity {
     @Override
+    protected void onResume() {
+        super.onResume();
+        notifyAppInfo();
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (event.getScanCode()) {
             case ScalarInput.ISV_KEY_UP:
@@ -27,8 +33,14 @@ public class BaseActivity extends Activity {
                 return onMenuKeyDown();
             case ScalarInput.ISV_KEY_S1_1:
                 return onFocusKeyDown();
+            case ScalarInput.ISV_KEY_S1_2:
+                return true;
             case ScalarInput.ISV_KEY_S2:
                 return onShutterKeyDown();
+            case ScalarInput.ISV_KEY_PLAY:
+                return onPlayKeyDown();
+            case ScalarInput.ISV_KEY_STASTOP:
+                return onMovieKeyDown();
             case 622:
                 return onC1KeyDown();
             case 595:
@@ -37,10 +49,12 @@ public class BaseActivity extends Activity {
                 return onLensAttached();
             case ScalarInput.ISV_DIAL_1_CLOCKWISE:
             case ScalarInput.ISV_DIAL_1_COUNTERCW:
-                return onDail1Changed(getDialStatus(ScalarInput.ISV_DIAL_1_STATUS));
+                return onUpperDialChanged(getDialStatus(ScalarInput.ISV_DIAL_1_STATUS) / 22);
             case ScalarInput.ISV_DIAL_2_CLOCKWISE:
             case ScalarInput.ISV_DIAL_2_COUNTERCW:
-                return onDail2Changed(getDialStatus(ScalarInput.ISV_DIAL_2_STATUS));
+                return onLowerDialChanged(getDialStatus(ScalarInput.ISV_DIAL_2_STATUS) / 22);
+            case ScalarInput.ISV_KEY_MODE_DIAL:
+                return onModeDialChanged(getDialStatus(ScalarInput.ISV_KEY_MODE_DIAL));
             default:
                 return super.onKeyDown(keyCode, event);
         }
@@ -67,19 +81,35 @@ public class BaseActivity extends Activity {
                 return onMenuKeyUp();
             case ScalarInput.ISV_KEY_S1_1:
                 return onFocusKeyUp();
+            case ScalarInput.ISV_KEY_S1_2:
+                return true;
             case ScalarInput.ISV_KEY_S2:
                 return onShutterKeyUp();
+            case ScalarInput.ISV_KEY_PLAY:
+                return onPlayKeyUp();
+            case ScalarInput.ISV_KEY_STASTOP:
+                return onMovieKeyUp();
             case 622:
                 return onC1KeyUp();
             case 595:
                 return onC2KeyUp();
+            case ScalarInput.ISV_KEY_LENS_ATTACH:
+                return onLensDetached();
+            case ScalarInput.ISV_DIAL_1_CLOCKWISE:
+            case ScalarInput.ISV_DIAL_1_COUNTERCW:
+                return true;
+            case ScalarInput.ISV_DIAL_2_CLOCKWISE:
+            case ScalarInput.ISV_DIAL_2_COUNTERCW:
+                return true;
+            case ScalarInput.ISV_KEY_MODE_DIAL:
+                return true;
             default:
                 return super.onKeyUp(keyCode, event);
         }
     }
 
     protected int getDialStatus(int key) {
-        return ScalarInput.getKeyStatus(key).status / 22;
+        return ScalarInput.getKeyStatus(key).status;
     }
 
     protected boolean onUpKeyDown() { return false; }
@@ -102,11 +132,17 @@ public class BaseActivity extends Activity {
     protected boolean onFocusKeyUp() { return false; }
     protected boolean onShutterKeyDown() { return false; }
     protected boolean onShutterKeyUp() { return false; }
+    protected boolean onPlayKeyDown() { return false; }
+    protected boolean onPlayKeyUp() { return false; }
+    protected boolean onMovieKeyDown() { return false; }
+    protected boolean onMovieKeyUp() { return false; }
     protected boolean onC1KeyDown() { return false; }
     protected boolean onC1KeyUp() { return false; }
     protected boolean onLensAttached() { return false; }
-    protected boolean onDail1Changed(int value) { return false; }
-    protected boolean onDail2Changed(int value) { return false; }
+    protected boolean onLensDetached() { return false; }
+    protected boolean onUpperDialChanged(int value) { return false; }
+    protected boolean onLowerDialChanged(int value) { return false; }
+    protected boolean onModeDialChanged(int value) { return false; }
 
     protected boolean onC2KeyDown() {
         return true;
@@ -117,10 +153,20 @@ public class BaseActivity extends Activity {
     }
 
     protected void setAutoPowerOffMode(boolean enable) {
-        String mode = enable ? "APO/NORMAL" : "APO/NO";
+        String mode = enable ? "APO/NORMAL" : "APO/NO";// or "APO/SPECIAL" ?
         Intent intent = new Intent();
         intent.setAction("com.android.server.DAConnectionManagerService.apo");
         intent.putExtra("apo_info", mode);
+        sendBroadcast(intent);
+    }
+
+    protected void notifyAppInfo() {
+        Intent intent = new Intent("com.android.server.DAConnectionManagerService.AppInfoReceive");
+        intent.putExtra("package_name", getComponentName().getPackageName());
+        intent.putExtra("class_name", getComponentName().getClassName());
+        //intent.putExtra("pkey", new String[] {});// either this or these two:
+        //intent.putExtra("pullingback_key", new String[] {});
+        //intent.putExtra("resume_key", new String[] {});
         sendBroadcast(intent);
     }
 }
