@@ -30,6 +30,7 @@ public class BaseActivity extends Activity {
             case ScalarInput.ISV_KEY_AEL:
                 return onAelKeyDown();
             case ScalarInput.ISV_KEY_MENU:
+            case ScalarInput.ISV_KEY_SK1:
                 return onMenuKeyDown();
             case ScalarInput.ISV_KEY_S1_1:
                 return onFocusKeyDown();
@@ -41,10 +42,11 @@ public class BaseActivity extends Activity {
                 return onPlayKeyDown();
             case ScalarInput.ISV_KEY_STASTOP:
                 return onMovieKeyDown();
-            case 622:
+            case ScalarInput.ISV_KEY_CUSTOM1:
                 return onC1KeyDown();
-            case 595:
-                return onC2KeyDown();
+            case ScalarInput.ISV_KEY_DELETE:
+            case ScalarInput.ISV_KEY_SK2:
+                return onDeleteKeyDown();
             case ScalarInput.ISV_KEY_LENS_ATTACH:
                 return onLensAttached();
             case ScalarInput.ISV_DIAL_1_CLOCKWISE:
@@ -78,6 +80,7 @@ public class BaseActivity extends Activity {
             case ScalarInput.ISV_KEY_AEL:
                 return onAelKeyUp();
             case ScalarInput.ISV_KEY_MENU:
+            case ScalarInput.ISV_KEY_SK1:
                 return onMenuKeyUp();
             case ScalarInput.ISV_KEY_S1_1:
                 return onFocusKeyUp();
@@ -89,10 +92,11 @@ public class BaseActivity extends Activity {
                 return onPlayKeyUp();
             case ScalarInput.ISV_KEY_STASTOP:
                 return onMovieKeyUp();
-            case 622:
+            case ScalarInput.ISV_KEY_CUSTOM1:
                 return onC1KeyUp();
-            case 595:
-                return onC2KeyUp();
+            case ScalarInput.ISV_KEY_DELETE:
+            case ScalarInput.ISV_KEY_SK2:
+                return onDeleteKeyUp();
             case ScalarInput.ISV_KEY_LENS_ATTACH:
                 return onLensDetached();
             case ScalarInput.ISV_DIAL_1_CLOCKWISE:
@@ -144,10 +148,10 @@ public class BaseActivity extends Activity {
     protected boolean onLowerDialChanged(int value) { return false; }
     protected boolean onModeDialChanged(int value) { return false; }
 
-    protected boolean onC2KeyDown() {
+    protected boolean onDeleteKeyDown() {
         return true;
     }
-    protected boolean onC2KeyUp() {
+    protected boolean onDeleteKeyUp() {
         onBackPressed();
         return true;
     }
