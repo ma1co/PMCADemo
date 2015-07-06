@@ -15,6 +15,12 @@
                 <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".BootCompletedReceiver" >
+            <intent-filter>
+                <action android:name="com.android.server.DAConnectionManagerService.BootCompleted" />
+                <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".MainActivity"
