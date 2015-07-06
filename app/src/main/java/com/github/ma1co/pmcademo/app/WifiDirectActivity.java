@@ -30,9 +30,9 @@ public class WifiDirectActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wifi_direct);
+        setContentView(R.layout.log);
 
-        textView = (TextView) findViewById(R.id.log);
+        textView = (TextView) findViewById(R.id.logView);
 
         wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifiDirectManager = (DirectManager) getSystemService(DirectManager.WIFI_DIRECT_SERVICE);

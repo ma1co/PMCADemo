@@ -28,7 +28,7 @@ public class WifiActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi);
 
-        textView = (TextView) findViewById(R.id.log);
+        textView = (TextView) findViewById(R.id.logView);
         webView = (WebView) findViewById(R.id.webView);
 
         wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);

@@ -41,7 +41,7 @@ public class PropertyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_property);
+        setContentView(R.layout.list);
 
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(new ListAdapter<PropertyListItem>(this, properties));

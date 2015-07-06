@@ -43,8 +43,8 @@
             android:label="@string/title_activity_wifi" >
         </activity>
         <activity
-                android:name=".WifiSettingActivity"
-                android:label="@string/title_activity_wifi_setting" >
+            android:name=".WifiSettingActivity"
+            android:label="@string/title_activity_wifi_setting" >
         </activity>
         <activity
             android:name=".WifiDirectActivity"

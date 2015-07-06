@@ -1,18 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.github.ma1co.pmcademo.app.WifiActivity">
+                android:layout_height="match_parent">
 
     <TextView
-            android:id="@+id/log"
+            android:id="@+id/logView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     <com.github.ma1co.pmcademo.app.WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/log"
+            android:layout_below="@+id/logView"
             android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

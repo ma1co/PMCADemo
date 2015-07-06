@@ -19,9 +19,9 @@ public class DisplayActivity extends BaseActivity implements DisplayManager.Disp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display);
+        setContentView(R.layout.log);
 
-        textView = (TextView) findViewById(R.id.log);
+        textView = (TextView) findViewById(R.id.logView);
     }
 
     @Override
