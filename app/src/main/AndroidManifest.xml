@@ -62,6 +62,10 @@
             android:name=".DisplayActivity"
             android:label="@string/title_activity_display" >
         </activity>
+        <activity
+            android:name=".LedActivity"
+            android:label="@string/title_activity_led" >
+        </activity>
     </application>
 
 </manifest>

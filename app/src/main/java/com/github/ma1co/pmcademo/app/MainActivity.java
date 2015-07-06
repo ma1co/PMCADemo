@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         new ActivityListItem(R.string.title_activity_wifi_setting, WifiSettingActivity.class),
         new ActivityListItem(R.string.title_activity_wifi_direct, WifiDirectActivity.class),
         new ActivityListItem(R.string.title_activity_display, DisplayActivity.class),
+        new ActivityListItem(R.string.title_activity_led, LedActivity.class),
     };
 
     @Override
