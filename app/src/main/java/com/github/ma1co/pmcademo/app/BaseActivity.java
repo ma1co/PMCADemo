@@ -8,8 +8,16 @@ import com.sony.scalar.sysutil.ScalarInput;
 public class BaseActivity extends Activity {
     @Override
     protected void onResume() {
+        Logger.info("Resume " + getComponentName().getClassName());
         super.onResume();
+
         notifyAppInfo();
+    }
+
+    @Override
+    protected void onPause() {
+        Logger.info("Pause " + getComponentName().getClassName());
+        super.onPause();
     }
 
     @Override
