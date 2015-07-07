@@ -10,6 +10,8 @@
     <string name="title_activity_camera">Camera</string>
     <string name="title_activity_display">Display</string>
     <string name="title_activity_led">LEDs</string>
+    <string name="title_activity_playback">Playback</string>
+    <string name="title_activity_image">View Image</string>
 
     <string name="modelName">Name</string>
     <string name="modelCode">Product code</string>

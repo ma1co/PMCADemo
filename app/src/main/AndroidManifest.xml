@@ -66,6 +66,14 @@
             android:name=".LedActivity"
             android:label="@string/title_activity_led" >
         </activity>
+        <activity
+            android:name=".PlaybackActivity"
+            android:label="@string/title_activity_playback" >
+        </activity>
+        <activity
+            android:name=".ImageActivity"
+            android:label="@string/title_activity_image" >
+        </activity>
     </application>
 
 </manifest>

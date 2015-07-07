@@ -63,5 +63,12 @@ Test some camera LEDs. The charging LED doesn't seem to be supported.
 * Press the enter button to flash the card LED in different speeds
 * Press the trash button to exit
 
+### Playback ###
+Displays the images on your SD card.
+
+* Use the up / down keys to select an image
+* Press the enter button to display it
+* Press the trash button to exit
+
 ## The Framework ##
 This app uses several Sony custom APIs. They can be found in *android_ext2.fsimg* under the *framework* folder. To enable simple compilation of this app, java stubs were generated. They can be found in the *framework* folder of this repository and are included as a `provided` project dependency.
