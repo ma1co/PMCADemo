@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.KeyEvent;
 import com.sony.scalar.sysutil.ScalarInput;
+import com.sony.scalar.sysutil.didep.Gpelibrary;
 
 public class BaseActivity extends Activity {
     @Override
@@ -11,6 +12,7 @@ public class BaseActivity extends Activity {
         Logger.info("Resume " + getComponentName().getClassName());
         super.onResume();
 
+        Gpelibrary.changeFrameBufferPixel(Gpelibrary.GS_FRAMEBUFFER_TYPE.ABGR8888);
         notifyAppInfo();
     }
 
@@ -18,6 +20,8 @@ public class BaseActivity extends Activity {
     protected void onPause() {
         Logger.info("Pause " + getComponentName().getClassName());
         super.onPause();
+
+        Gpelibrary.changeFrameBufferPixel(Gpelibrary.GS_FRAMEBUFFER_TYPE.RGBA4444);
     }
 
     @Override
