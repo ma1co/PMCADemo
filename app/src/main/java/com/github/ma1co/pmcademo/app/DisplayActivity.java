@@ -1,6 +1,7 @@
 package com.github.ma1co.pmcademo.app;
 
 import android.os.Bundle;
+import android.view.Display;
 import android.widget.TextView;
 import com.sony.scalar.hardware.avio.DisplayManager;
 
@@ -57,7 +58,8 @@ public class DisplayActivity extends BaseActivity {
         else
             name = "Unknown device (" + device + ")";
 
-        log("Current display: " + name + " (" + info.res_w + " x " + info.res_h + ")");
+        Display display = getWindowManager().getDefaultDisplay();
+        log("Current display: " + name + " (" + info.res_w + " x " + info.res_h + "). Android: " + display.getWidth() + " x " + display.getHeight());
     }
 
     protected void log(String msg) {
