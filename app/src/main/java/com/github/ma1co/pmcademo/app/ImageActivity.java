@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import com.sony.scalar.provider.AvindexStore;
 
+import java.io.InputStream;
+
 public class ImageActivity extends BaseActivity {
+    private Bitmap image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,9 +21,16 @@ public class ImageActivity extends BaseActivity {
         long id = getIntent().getLongExtra("id", 0);
 
         Uri baseUri = AvindexStore.Images.Media.getContentUri(AvindexStore.Images.Media.EXTERNAL_DEFAULT_MEDIA_ID);
-        byte[] imageData = AvindexStore.Images.Media.getScreennail(getContentResolver(), baseUri, id);
-        Bitmap image = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+        InputStream is = AvindexStore.Images.Media.getScreennailInputStream(getContentResolver(), baseUri, id);
+        image = BitmapFactory.decodeStream(is);
 
         imageView.setImageBitmap(image);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        image.recycle();
+        image = null;
     }
 }
