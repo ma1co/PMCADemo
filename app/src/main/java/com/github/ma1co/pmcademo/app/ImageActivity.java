@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageView;
 import com.sony.scalar.provider.AvindexStore;
 
 import java.io.InputStream;
@@ -17,7 +16,7 @@ public class ImageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image);
 
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        ScalingBitmapView imageView = (ScalingBitmapView) findViewById(R.id.imageView);
         long id = getIntent().getLongExtra("id", 0);
 
         Uri baseUri = AvindexStore.Images.Media.getContentUri(AvindexStore.Images.Media.EXTERNAL_DEFAULT_MEDIA_ID);

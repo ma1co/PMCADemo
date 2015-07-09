@@ -8,6 +8,8 @@ import com.sony.scalar.sysutil.ScalarInput;
 import com.sony.scalar.sysutil.didep.Gpelibrary;
 
 public class BaseActivity extends Activity {
+    public static final String NOTIFICATION_DISPLAY_CHANGED = "NOTIFICATION_DISPLAY_CHANGED";
+
     private DisplayManager displayManager;
 
     @Override
@@ -184,7 +186,9 @@ public class BaseActivity extends Activity {
         return true;
     }
 
-    public void onDisplayChanged(String device) {}
+    public void onDisplayChanged(String device) {
+        AppNotificationManager.getInstance().notify(NOTIFICATION_DISPLAY_CHANGED);
+    }
 
     protected void setAutoPowerOffMode(boolean enable) {
         String mode = enable ? "APO/NORMAL" : "APO/NO";// or "APO/SPECIAL" ?

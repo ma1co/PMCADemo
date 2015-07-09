@@ -3,7 +3,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-    <ImageView
+    <com.github.ma1co.pmcademo.app.ScalingBitmapView
             android:id="@+id/imageView"
             android:layout_width="60dp"
             android:layout_height="60dp"

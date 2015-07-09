@@ -8,7 +8,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.ResourceCursorAdapter;
+import android.widget.TextView;
 import com.sony.scalar.media.AvindexContentInfo;
 import com.sony.scalar.provider.AvindexStore;
 
@@ -36,7 +39,7 @@ public class PlaybackActivity extends BaseActivity implements AdapterView.OnItem
 
                 ((TextView) view.findViewById(android.R.id.text1)).setText(filename);
                 ((TextView) view.findViewById(android.R.id.text2)).setText(date);
-                ((ImageView) view.findViewById(R.id.imageView)).setImageBitmap(thumbnail);
+                ((ScalingBitmapView) view.findViewById(R.id.imageView)).setImageBitmap(thumbnail);
             }
         });
 
