@@ -17,7 +17,7 @@ public class BaseActivity extends Activity {
         Logger.info("Resume " + getComponentName().getClassName());
         super.onResume();
 
-        Gpelibrary.changeFrameBufferPixel(Gpelibrary.GS_FRAMEBUFFER_TYPE.ABGR8888);
+        setColorDepth(true);
         notifyAppInfo();
 
         displayManager = new DisplayManager();
@@ -35,7 +35,7 @@ public class BaseActivity extends Activity {
         Logger.info("Pause " + getComponentName().getClassName());
         super.onPause();
 
-        Gpelibrary.changeFrameBufferPixel(Gpelibrary.GS_FRAMEBUFFER_TYPE.RGBA4444);
+        setColorDepth(false);
 
         displayManager.releaseDisplayStatusListener();
         displayManager.finish();
@@ -196,6 +196,11 @@ public class BaseActivity extends Activity {
         intent.setAction("com.android.server.DAConnectionManagerService.apo");
         intent.putExtra("apo_info", mode);
         sendBroadcast(intent);
+    }
+
+    protected void setColorDepth(boolean highQuality) {
+        Gpelibrary.GS_FRAMEBUFFER_TYPE type = highQuality ? Gpelibrary.GS_FRAMEBUFFER_TYPE.ABGR8888 : Gpelibrary.GS_FRAMEBUFFER_TYPE.RGBA4444;
+        Gpelibrary.changeFrameBufferPixel(type);
     }
 
     protected void notifyAppInfo() {

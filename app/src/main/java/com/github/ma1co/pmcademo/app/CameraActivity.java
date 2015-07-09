@@ -73,4 +73,9 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
         camera.cancelTakePicture();
         return true;
     }
+
+    @Override
+    protected void setColorDepth(boolean highQuality) {
+        super.setColorDepth(false);
+    }
 }
