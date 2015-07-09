@@ -3,10 +3,13 @@ package com.github.ma1co.pmcademo.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.KeyEvent;
+import com.sony.scalar.hardware.avio.DisplayManager;
 import com.sony.scalar.sysutil.ScalarInput;
 import com.sony.scalar.sysutil.didep.Gpelibrary;
 
 public class BaseActivity extends Activity {
+    private DisplayManager displayManager;
+
     @Override
     protected void onResume() {
         Logger.info("Resume " + getComponentName().getClassName());
@@ -14,6 +17,15 @@ public class BaseActivity extends Activity {
 
         Gpelibrary.changeFrameBufferPixel(Gpelibrary.GS_FRAMEBUFFER_TYPE.ABGR8888);
         notifyAppInfo();
+
+        displayManager = new DisplayManager();
+        displayManager.setDisplayStatusListener(new DisplayManager.DisplayEventListener() {
+            @Override
+            public void onDeviceStatusChanged(int event) {
+                if (event == DisplayManager.EVENT_SWITCH_DEVICE)
+                    onDisplayChanged(displayManager.getActiveDevice());
+            }
+        });
     }
 
     @Override
@@ -22,6 +34,10 @@ public class BaseActivity extends Activity {
         super.onPause();
 
         Gpelibrary.changeFrameBufferPixel(Gpelibrary.GS_FRAMEBUFFER_TYPE.RGBA4444);
+
+        displayManager.releaseDisplayStatusListener();
+        displayManager.finish();
+        displayManager = null;
     }
 
     @Override
@@ -168,6 +184,8 @@ public class BaseActivity extends Activity {
         return true;
     }
 
+    public void onDisplayChanged(String device) {}
+
     protected void setAutoPowerOffMode(boolean enable) {
         String mode = enable ? "APO/NORMAL" : "APO/NO";// or "APO/SPECIAL" ?
         Intent intent = new Intent();
@@ -184,5 +202,9 @@ public class BaseActivity extends Activity {
         //intent.putExtra("pullingback_key", new String[] {});
         //intent.putExtra("resume_key", new String[] {});
         sendBroadcast(intent);
+    }
+
+    public DisplayManager getDisplayManager() {
+        return displayManager;
     }
 }

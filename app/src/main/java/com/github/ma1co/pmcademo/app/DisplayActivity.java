@@ -6,7 +6,7 @@ import com.sony.scalar.hardware.avio.DisplayManager;
 
 import java.util.Arrays;
 
-public class DisplayActivity extends BaseActivity implements DisplayManager.DisplayEventListener {
+public class DisplayActivity extends BaseActivity {
     private String devices[] = {
         DisplayManager.DEVICE_ID_PANEL,
         DisplayManager.DEVICE_ID_FINDER,
@@ -14,7 +14,6 @@ public class DisplayActivity extends BaseActivity implements DisplayManager.Disp
     };
 
     private TextView textView;
-    private DisplayManager displayManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,36 +26,26 @@ public class DisplayActivity extends BaseActivity implements DisplayManager.Disp
     @Override
     protected void onResume() {
         super.onResume();
-        displayManager = new DisplayManager();
-        displayManager.setDisplayStatusListener(this);
         logDisplay();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        displayManager.releaseDisplayStatusListener();
-        displayManager.finish();
-        displayManager = null;
-    }
-
-    @Override
     protected boolean onEnterKeyUp() {
-        int currentDevice = Arrays.asList(devices).indexOf(displayManager.getActiveDevice());
+        int currentDevice = Arrays.asList(devices).indexOf(getDisplayManager().getActiveDevice());
         int nextDevice = (currentDevice + 1) % devices.length;
-        displayManager.switchDisplayOutputTo(devices[nextDevice]);
+        getDisplayManager().switchDisplayOutputTo(devices[nextDevice]);
         return true;
     }
 
     @Override
-    public void onDeviceStatusChanged(int event) {
-        if (event == DisplayManager.EVENT_SWITCH_DEVICE)
-            logDisplay();
+    public void onDisplayChanged(String device) {
+        super.onDisplayChanged(device);
+        logDisplay();
     }
 
     protected void logDisplay() {
-        String device = displayManager.getActiveDevice();
-        DisplayManager.DeviceInfo info = displayManager.getDeviceInfo(device);
+        String device = getDisplayManager().getActiveDevice();
+        DisplayManager.DeviceInfo info = getDisplayManager().getDeviceInfo(device);
 
         String name;
         if (device.equals(DisplayManager.DEVICE_ID_PANEL))
