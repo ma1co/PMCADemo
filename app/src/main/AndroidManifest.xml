@@ -74,6 +74,10 @@
             android:name=".ImageActivity"
             android:label="@string/title_activity_image" >
         </activity>
+        <activity
+            android:name=".InstallActivity"
+            android:label="@string/title_activity_install" >
+        </activity>
     </application>
 
 </manifest>

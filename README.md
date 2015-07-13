@@ -70,5 +70,12 @@ Displays the images on your SD card.
 * Press the enter button to display it
 * Press the trash button to exit
 
+### Install ###
+Install new apps from your SD card. All *.spk* files under *[SD card]/PMCADEMO* are listed. You can download apps in spk format [here](https://sony-pmca.appspot.com/apps).
+
+* Use the up / down keys to select a package
+* Press the enter button to install it
+* Press the trash button to exit
+
 ## The Framework ##
 This app uses several Sony custom APIs. They can be found in *android_ext2.fsimg* under the *framework* folder. To enable simple compilation of this app, java stubs were generated. They can be found in the *framework* folder of this repository and are included as a `provided` project dependency.
