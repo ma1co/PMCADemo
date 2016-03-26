@@ -78,4 +78,4 @@ Install new apps from your SD card. All *.spk* files under *[SD card]/PMCADEMO* 
 * Press the trash button to exit
 
 ## The Framework ##
-This app uses several Sony custom APIs. They can be found in *android_ext2.fsimg* under the *framework* folder. To enable simple compilation of this app, java stubs were generated. They can be found in the *framework* folder of this repository and are included as a `provided` project dependency.
+This app uses several Sony custom APIs. See [OpenMemories: Framework](https://github.com/ma1co/OpenMemories-Framework) for more information.
