@@ -3,6 +3,7 @@ package com.github.ma1co.pmcademo.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.KeyEvent;
+import com.github.ma1co.openmemories.framework.DateTime;
 import com.github.ma1co.openmemories.framework.DeviceInfo;
 import com.sony.scalar.hardware.avio.DisplayManager;
 import com.sony.scalar.sysutil.ScalarInput;
@@ -220,5 +221,9 @@ public class BaseActivity extends Activity {
 
     public DeviceInfo getDeviceInfo() {
         return DeviceInfo.getInstance();
+    }
+
+    public DateTime getDateTime() {
+        return DateTime.getInstance();
     }
 }
