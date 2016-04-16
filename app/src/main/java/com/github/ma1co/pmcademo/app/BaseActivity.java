@@ -5,11 +5,10 @@ import android.content.Intent;
 import android.view.KeyEvent;
 import com.github.ma1co.openmemories.framework.DateTime;
 import com.github.ma1co.openmemories.framework.DeviceInfo;
-import com.sony.scalar.hardware.avio.DisplayManager;
+import com.github.ma1co.openmemories.framework.DisplayManager;
 import com.sony.scalar.sysutil.ScalarInput;
-import com.sony.scalar.sysutil.didep.Gpelibrary;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends Activity implements DisplayManager.Listener {
     public static final String NOTIFICATION_DISPLAY_CHANGED = "NOTIFICATION_DISPLAY_CHANGED";
 
     private DisplayManager displayManager;
@@ -19,17 +18,11 @@ public class BaseActivity extends Activity {
         Logger.info("Resume " + getComponentName().getClassName());
         super.onResume();
 
+        displayManager = DisplayManager.create(this);
+        displayManager.addListener(this);
+
         setColorDepth(true);
         notifyAppInfo();
-
-        displayManager = new DisplayManager();
-        displayManager.setDisplayStatusListener(new DisplayManager.DisplayEventListener() {
-            @Override
-            public void onDeviceStatusChanged(int event) {
-                if (event == DisplayManager.EVENT_SWITCH_DEVICE)
-                    onDisplayChanged(displayManager.getActiveDevice());
-            }
-        });
     }
 
     @Override
@@ -39,8 +32,7 @@ public class BaseActivity extends Activity {
 
         setColorDepth(false);
 
-        displayManager.releaseDisplayStatusListener();
-        displayManager.finish();
+        displayManager.release();
         displayManager = null;
     }
 
@@ -188,7 +180,8 @@ public class BaseActivity extends Activity {
         return true;
     }
 
-    public void onDisplayChanged(String device) {
+    @Override
+    public void displayChanged(DisplayManager.Display display) {
         AppNotificationManager.getInstance().notify(NOTIFICATION_DISPLAY_CHANGED);
     }
 
@@ -201,8 +194,7 @@ public class BaseActivity extends Activity {
     }
 
     protected void setColorDepth(boolean highQuality) {
-        Gpelibrary.GS_FRAMEBUFFER_TYPE type = highQuality ? Gpelibrary.GS_FRAMEBUFFER_TYPE.ABGR8888 : Gpelibrary.GS_FRAMEBUFFER_TYPE.RGBA4444;
-        Gpelibrary.changeFrameBufferPixel(type);
+        displayManager.setColorDepth(highQuality ? DisplayManager.ColorDepth.HIGH : DisplayManager.ColorDepth.LOW);
     }
 
     protected void notifyAppInfo() {

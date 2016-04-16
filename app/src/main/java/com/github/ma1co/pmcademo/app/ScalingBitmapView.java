@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-import com.sony.scalar.hardware.avio.DisplayManager;
+import com.github.ma1co.openmemories.framework.DisplayManager;
 
 public class ScalingBitmapView extends ImageView implements AppNotificationManager.NotificationListener {
     protected class ScaledBitmapDrawable extends BitmapDrawable {
@@ -42,18 +42,11 @@ public class ScalingBitmapView extends ImageView implements AppNotificationManag
     }
 
     private void update() {
-        DisplayManager displayManager = new DisplayManager();
-        String device = displayManager.getActiveDevice();
-        DisplayManager.DeviceInfo info = displayManager.getDeviceInfo(device);
-        displayManager.finish();
-        displayManager = null;
+        DisplayManager displayManager = DisplayManager.create(getContext());
+        float displayAspect = displayManager.getActiveDisplayInfo().aspectRatio;
+        float frameBufferAspect = displayManager.getFrameBufferInfo().aspectRatio;
+        displayManager.release();
 
-        float scale;
-        if (device.equals(DisplayManager.DEVICE_ID_PANEL) && info.aspect == DisplayManager.ASPECT_RATIO_16_9)
-            scale = .75f;
-        else
-            scale = 1;
-
-        setImageDrawable(new ScaledBitmapDrawable(bitmap, scale));
+        setImageDrawable(new ScaledBitmapDrawable(bitmap, frameBufferAspect / displayAspect));
     }
 }
