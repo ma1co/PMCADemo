@@ -2,7 +2,6 @@ package com.github.ma1co.pmcademo.app;
 
 import android.os.Bundle;
 import android.widget.ListView;
-import com.sony.scalar.sysutil.ScalarProperties;
 
 public class PropertyActivity extends BaseActivity {
     protected class PropertyListItem extends ListAdapter.ListItem {
@@ -25,17 +24,19 @@ public class PropertyActivity extends BaseActivity {
         }
     }
 
-    protected class StringPropertyListItem extends PropertyListItem {
-        public StringPropertyListItem(int nameResource, String prop) {
-            super(nameResource, ScalarProperties.getString(prop));
-        }
-    }
-
     protected PropertyListItem properties[] = {
-        new StringPropertyListItem(R.string.modelName, ScalarProperties.PROP_MODEL_NAME),
-        new StringPropertyListItem(R.string.modelCode, ScalarProperties.PROP_MODEL_CODE),
-        new StringPropertyListItem(R.string.modelSerial, ScalarProperties.PROP_MODEL_SERIAL_CODE),
-        new PropertyListItem(R.string.firmwareVersion, ScalarProperties.getFirmwareVersion()),
+        new PropertyListItem(R.string.type, getDeviceInfo().isCamera() ? "Camera" : "Other"),
+        new PropertyListItem(R.string.brand, getDeviceInfo().getBrand()),
+        new PropertyListItem(R.string.model, getDeviceInfo().getModel()),
+        new PropertyListItem(R.string.category, getDeviceInfo().getCategory().toString()),
+        new PropertyListItem(R.string.productCode, getDeviceInfo().getProductCode()),
+        new PropertyListItem(R.string.serial, getDeviceInfo().getSerialNumber()),
+        new PropertyListItem(R.string.firmwareVersion, getDeviceInfo().getFirmwareVersion()),
+        new PropertyListItem(R.string.hardwareVersion, Integer.toString(getDeviceInfo().getHardwareVersion())),
+        new PropertyListItem(R.string.apiVersion, Integer.toString(getDeviceInfo().getApiVersion())),
+        new PropertyListItem(R.string.androidVersion, getDeviceInfo().getAndroidVersion()),
+        new PropertyListItem(R.string.androidSdk, Integer.toString(getDeviceInfo().getAndroidSdkVersion())),
+        new PropertyListItem(R.string.androidIncremental, getDeviceInfo().getAndroidIncrementalVersion()),
     };
 
     @Override

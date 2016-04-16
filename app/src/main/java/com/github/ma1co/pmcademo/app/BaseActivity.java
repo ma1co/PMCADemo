@@ -3,6 +3,7 @@ package com.github.ma1co.pmcademo.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.KeyEvent;
+import com.github.ma1co.openmemories.framework.DeviceInfo;
 import com.sony.scalar.hardware.avio.DisplayManager;
 import com.sony.scalar.sysutil.ScalarInput;
 import com.sony.scalar.sysutil.didep.Gpelibrary;
@@ -215,5 +216,9 @@ public class BaseActivity extends Activity {
 
     public DisplayManager getDisplayManager() {
         return displayManager;
+    }
+
+    public DeviceInfo getDeviceInfo() {
+        return DeviceInfo.getInstance();
     }
 }

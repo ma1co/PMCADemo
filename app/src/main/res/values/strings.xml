@@ -14,8 +14,16 @@
     <string name="title_activity_image">View Image</string>
     <string name="title_activity_install">Install</string>
 
-    <string name="modelName">Name</string>
-    <string name="modelCode">Product code</string>
-    <string name="modelSerial">Serial number</string>
+    <string name="type">Device type</string>
+    <string name="brand">Brand</string>
+    <string name="model">Model</string>
+    <string name="category">Category</string>
+    <string name="productCode">Product code</string>
+    <string name="serial">Serial number</string>
     <string name="firmwareVersion">Firmware</string>
+    <string name="hardwareVersion">Hardware version</string>
+    <string name="apiVersion">Api version</string>
+    <string name="androidVersion">Android version</string>
+    <string name="androidSdk">Android SDK version</string>
+    <string name="androidIncremental">Android incremental version</string>
 </resources>
