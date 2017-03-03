@@ -3,8 +3,8 @@
                 android:layout_height="match_parent">
 
     <com.github.ma1co.pmcademo.app.ScalingBitmapView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/imageView"/>
 
 </RelativeLayout>
